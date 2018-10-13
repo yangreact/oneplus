@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            border: 10px solid #585858;
+            /*width: 100px;*/
+            height: 100px;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            position: absolute;
+            padding: 10px;
+            color: black;
+            text-align: center;
+            line-height: 100px;
+        }
+        #div2{
+            width: 50px;
+            height: 50px;
+            background: #39C6F4;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="div">
+        元素的客户区大小
+    </div>
+    <div id="div2">
+
+    </div>
+    <script>
+        var div = document.getElementById('div');
+        var div2 = document.getElementById('div2');
+        function getElementLeft(element) {
+            var actualLeft = element.offsetLeft;
+            var current = element.offsetParent;
+            while (current !=null){
+                actualLeft += current.offsetLeft;
+                current = current.offsetParent;
+            }
+            return actualLeft;
+        }
+        function getElementL(element){
+            var actualLeft = element.offsetLeft;
+            var current = element.offsetLeft;
+            while(current != null){
+                actualLeft += current.offsetLeft;
+                current = current.offsetLeft;
+            }
+            return actualLeft;
+        }
+        getElementLeft(div);
+        var result = getElementLeft(div);
+        console.log(result);
+        function getElementTop(element) {
+            var actualTop = element.offsetTop;
+            var current = element.offsetParent;
+            while(current !=null){
+                actualTop += current.offsetTop;
+                current = current.offsetParent;
+            }
+            return actualTop;
+        }
+        var result2 = getElementTop(div);
+        console.log(result2);
+        if(result2 < 200){
+            div2.style.display = 'block';
+        }
+        function getViewPort() {
+            if(document.compatMode == 'BackCompat'){
+                return {
+                    width: document.body.clientWidth,
+                    height: document.body.clientHeight
+                };
+            }else{
+                return {
+                    width: document.documentElement.clientWidth,
+                    height: document.documentElement.clientHeight
+                };
+            }
+        }
+
+        getViewPort();
+        var width = div.clientWidth ;
+        var height = div.clientHeight;
+        console.log(width+'-'+height);
+    </script>
+</body>
+</html>
